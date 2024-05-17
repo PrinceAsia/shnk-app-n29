@@ -15,14 +15,13 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = UserModel
-        fields = ('username', 'email', 'password')
+        fields = ('username', 'password')
 
 
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = get_user_model()
-        fields = ('first_name', 'last_name', 'email')
-
-
-class PasswordResetSerializer(serializers.Serializer):
-    email = serializers.EmailField()
+        fields = ('id', 'first_name', 'last_name', 'birth_date', 'phone', 'avatar')
+        # extra_kwargs = {
+        #     'id': {'read_only': True},
+        # }

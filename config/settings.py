@@ -36,10 +36,13 @@ THIRD_APPS = [
     'drf_yasg',
     'rest_framework',
     'rest_framework_simplejwt',
+    'ckeditor',
 ]
 
 MY_APPS = [
     'users',
+    'app_shnk',
+    'app_comments',
 ]
 
 INSTALLED_APPS = DJANGO_DEFAULT_APPS + THIRD_APPS + MY_APPS
@@ -125,12 +128,12 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 STATIC_URL = 'static/'
 
-if DEBUG is False:
+# if DEBUG is False:
     # STATIC_ROOT = '/home/my_domain/domain_dir/static/'
-    STATIC_ROOT = 'static'
+STATIC_ROOT = 'static'
 
 STATICFILES_DIRS = [
-    BASE_DIR / "static",
+    BASE_DIR / "staticfiles",
 ]
 
 # Default primary key field type
@@ -158,8 +161,8 @@ REST_FRAMEWORK = {
 }
 
 SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(hours=1),
-    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
+    "ACCESS_TOKEN_LIFETIME": timedelta(weeks=1),
+    "REFRESH_TOKEN_LIFETIME": timedelta(weeks=10),
     "ROTATE_REFRESH_TOKENS": False,
     "BLACKLIST_AFTER_ROTATION": False,
     "UPDATE_LAST_LOGIN": False,
@@ -207,3 +210,12 @@ EMAIL_HOST_USER = getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = getenv('EMAIL_HOST_PASSWORD')
 # EMAIL_USE_SSL = True
 
+AUTH_USER_MODEL = 'users.CustomUser'
+
+CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
+CKEDITOR_UPLOAD_PATH = "ckeditor/uploads/"
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'full',
+    },
+}
